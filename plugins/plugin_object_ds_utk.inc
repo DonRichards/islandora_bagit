@@ -30,9 +30,10 @@ function islandora_bagit_plugin_object_ds_utk_init($islandora_object, $tmp_ds_di
   foreach ($ds_files as $ds_filename) {
     // Add each file in the directory to $files_to_add.
     $source_file_to_add = $ds_filename;
-    $keepers = array('OBJ','MODS','RELS-EXT','RELS-INT','TECHMD','HOCR','OCR','POLICY','FULL-TEXT','COLLECTION_POLICY','PROJECT','TEI','EAD','TRANSCRIPT');
+    // $keepers = array('OBJ','MODS','RELS-EXT','RELS-INT','TECHMD','HOCR','OCR','POLICY','FULL-TEXT','COLLECTION_POLICY','PROJECT','TEI','EAD','TRANSCRIPT');
+    $derivatives = array('DC','JPG','HOCR','MEDIUM_SIZE','JPG','JP2');
     $info = pathinfo($source_file_to_add);
-    if ((file_exists($source_file_to_add) && is_file($source_file_to_add)) && in_array(basename($source_file_to_add, '.'.$info['extension']), $keepers) ) {
+    if ((file_exists($source_file_to_add) && is_file($source_file_to_add)) && !in_array(basename($source_file_to_add, '.'.$info['extension']), $derivatives) ) {
       $files_to_add[] = array(
         'source' => $source_file_to_add,
         // We use basename here since there are no subdirectories in the Bag's
